@@ -1,11 +1,14 @@
 {
   "name": "mediumclone_vue",
   "version": "0.1.0",
-  "private": false,
+  "private": true,
+  "homepage": "https://akunin94.github.io/vue_project/",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "deploy": "gh-pages -d dist",
+    "predeploy": "npm run build"
   },
   "dependencies": {
     "axios": "^0.24.0",
