@@ -4,7 +4,7 @@
         <div class="tag-list" v-if="popularTags">
             <router-link :to="{name: 'tag', params: {slug: popularTag}}" class="tag-default tag-pill" v-for="popularTag in popularTags" :key="popularTag">{{ popularTag }}</router-link>
         </div>
-        <mcv-loading v-if="loading" />
+        <mcv-loading v-if="isLoading" />
         <mcv-error-message v-if="error" />
     </div>
 </template>
@@ -23,7 +23,7 @@ export default {
     },
     computed: {
         ...mapState({
-            loading: state => state.popularTags.isLoading,
+            isLoading: state => state.popularTags.isLoading,
             popularTags: state => state.popularTags.data,
             error: state => state.popularTags.error,
         })

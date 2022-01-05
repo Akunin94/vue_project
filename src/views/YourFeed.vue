@@ -33,6 +33,11 @@ export default {
     return {
       apiUrl: '/articles/feed',
     }
+  },
+  computed: {
+    tagName() {
+      return this.$route.params.slug
+    }
   }
 }
 </script>

@@ -40,7 +40,7 @@ const actions = {
                     resolve(tags)
                 })
                 .catch(() => {
-                    context.commit(mutationTypes.getTagsFailure)
+                    context.commit(mutationTypes.getPopularTagsFailure)
                 })
         })
     },
