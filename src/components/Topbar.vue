@@ -15,7 +15,7 @@
                     <router-link class="nav-link" :to="{name: 'settings'}" active-class="active"><i class="ion-gear-a"></i> &nbsp; Settings</router-link>
                 </li>
                 <li class="nav-item">
-                    <router-link class="nav-link" :to="{name: 'userProfile', params: {slug: 'currentUser.username'}}" active-class="active">
+                    <router-link class="nav-link" :to="{name: 'userProfile', params: {slug: currentUser.username}}" active-class="active">
                         <img v-if="currentUser.image" class="user-pic" :src="currentUser.image"> &nbsp; {{ currentUser.username }}
                     </router-link>
                 </li>
