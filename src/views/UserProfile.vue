@@ -9,16 +9,7 @@
                         <p>{{ userProfile.bio }}</p>
                         <div>
                             <router-link v-if="isCurrentUserProfile" class="btn btn-sm btn-outline-secondary action-btn" :to="{name: 'settings'}">Edit Profile Settings</router-link>
-                            <button v-else class="btn btn-sm action-btn" :class="{'disabled': isFollowLoading, 'btn-outline-secondary': !userProfile.following, 'btn-secondary': userProfile.following }" @click.prevent="followUser">
-                                <template v-if="userProfile.following">
-                                    <i class="ion-minus-round"></i> &nbsp; 
-                                    Unfollow {{ userProfile.username }}
-                                </template>
-                                <template v-else>
-                                    <i class="ion-plus-round"></i> &nbsp; 
-                                    Follow {{ userProfile.username }}
-                                </template>
-                            </button>
+                            <mcv-active-buttons :userProfile="userProfile" v-else />
                         </div>
                     </div>
                 </div>
@@ -50,18 +41,19 @@ import {actionTypes as userProfileActionTypes} from '@/store/modules/userProfile
 import {getterTypes as authGetterTypes} from '@/store/modules/auth'
 
 import McvFeed from '@/components/Feed'
+import McvActiveButtons from '@/components/ActiveButtons'
 
 export default {
     name: 'McvUserProfile',
     components: {
-        McvFeed
+        McvFeed,
+        McvActiveButtons
     },
     computed: {
         ...mapState({
             isLoading: state => state.userProfile.isLoading,
             error: state => state.userProfile.error,
             userProfile: state => state.userProfile.data,
-            isFollowLoading: state => state.userProfile.isFollowLoading,
         }),
         ...mapGetters({
             currentUser: authGetterTypes.currentUser
@@ -98,17 +90,6 @@ export default {
             this.$store.dispatch(userProfileActionTypes.getUserProfile, {
                 slug: this.userProfileSlug
             })
-        },
-        followUser() {
-            if (this.userProfile.following) {
-                this.$store.dispatch(userProfileActionTypes.unfollowUser, {
-                    slug: this.userProfileSlug
-                })
-            } else {
-                this.$store.dispatch(userProfileActionTypes.followUser, {
-                    slug: this.userProfileSlug
-                })
-            }
         }
     }
 }

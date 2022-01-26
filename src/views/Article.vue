@@ -8,7 +8,7 @@
                         <img :src="article.author.image" alt="">
                     </router-link>
                     <div class="info">
-                        <router-link :to="{name: 'userProfile', params: {slug: article.author.username}}">
+                        <router-link class="author" :to="{name: 'userProfile', params: {slug: article.author.username}}">
                             {{ article.author.username }}
                         </router-link>
                         <span class="date">{{ article.createdAt }}</span>
@@ -23,6 +23,7 @@
                             Delete Article
                         </button>
                     </span>
+                    <mcv-active-buttons :userProfile="article.author" v-else />
                 </div>
             </div>
         </div>
@@ -49,13 +50,15 @@ import {mapState, mapGetters} from 'vuex'
 import McvLoading from '@/components/Loading'
 import McvErrorMessage from '@/components/ErrorMessage'
 import McvTaglist from '@/components/Taglist'
+import McvActiveButtons from '@/components/ActiveButtons'
 
 export default {
     name: 'McvArticle',
     components: {
         McvLoading,
         McvErrorMessage,
-        McvTaglist
+        McvTaglist,
+        McvActiveButtons
     },
     computed: {
         ...mapState({
