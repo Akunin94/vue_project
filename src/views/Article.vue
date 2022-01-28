@@ -24,6 +24,8 @@
                         </button>
                     </span>
                     <mcv-active-buttons :userProfile="article.author" v-else />
+                    &nbsp;
+                    <mcv-add-to-favorites :is-favorited="article.favorited" :article-slug="article.slug" :favorites-count="article.favoritesCount" :hasText="true" />
                 </div>
             </div>
         </div>
@@ -51,6 +53,7 @@ import McvLoading from '@/components/Loading'
 import McvErrorMessage from '@/components/ErrorMessage'
 import McvTaglist from '@/components/Taglist'
 import McvActiveButtons from '@/components/ActiveButtons'
+import McvAddToFavorites from '@/components/AddToFavorites'
 
 export default {
     name: 'McvArticle',
@@ -58,7 +61,8 @@ export default {
         McvLoading,
         McvErrorMessage,
         McvTaglist,
-        McvActiveButtons
+        McvActiveButtons,
+        McvAddToFavorites
     },
     computed: {
         ...mapState({

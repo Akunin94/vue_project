@@ -20,7 +20,7 @@ const actions = {
     [actionTypes.addToFavorites](context, {slug, isFavorited}) {
         return new Promise(resolve => {
             context.commit(mutationTypes.addToFavoritesStart)
-            const promise  = isFavorited ? addToFavoritesApi.removeFromFavorites(slug) : addToFavoritesApi.addFromFavorites(slug)
+            const promise  = isFavorited ? addToFavoritesApi.removeFromFavorites(slug) : addToFavoritesApi.addToFavorites(slug)
 
             promise.then(article => {
                 context.commit(mutationTypes.addToFavoritesSuccess, article)

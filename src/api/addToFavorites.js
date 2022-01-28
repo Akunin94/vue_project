@@ -9,7 +9,7 @@ const addToFavorites = slug => {
 
 const removeFromFavorites = slug => {
     const url = getUrl(slug)
-    return axios.post(url).then(response => response.data.article)
+    return axios.delete(url).then(response => response.data.article)
 }
 
 export default {
