@@ -11,7 +11,7 @@
                         <router-link class="author" :to="{name: 'userProfile', params: {slug: article.author.username}}">
                             {{ article.author.username }}
                         </router-link>
-                        <span class="date">{{ article.createdAt }}</span>
+                        <span class="date">{{ articleDate }}</span>
                     </div>
                     <span v-if="isAuthor">
                         <router-link class="btn btn-outline-secondary btn-sm" :to="{name: 'editArticle', params: {slug: article.slug}}">
@@ -48,6 +48,7 @@
 import {actionTypes as articleActionTypes} from '@/store/modules/article'
 import {getterTypes as authGetterTypes} from '@/store/modules/auth'
 import {mapState, mapGetters} from 'vuex'
+import moment from 'moment'
 
 import McvLoading from '@/components/Loading'
 import McvErrorMessage from '@/components/ErrorMessage'
@@ -79,7 +80,10 @@ export default {
             }
 
             return this.currentUser.username === this.article.author.username
-        }
+        },
+        articleDate: function(){
+            return moment(this.article.createdAt).format('MMMM Do YYYY')
+        },
     },
     mounted() {
         this.$store.dispatch(articleActionTypes.getArticle, {slug: this.$route.params.slug})
