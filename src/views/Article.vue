@@ -40,6 +40,24 @@
                     <mcv-taglist v-if="article.tagList" :tagList="article.tagList" />
                 </div>
             </div>
+            <hr>
+            <div class="article-actions" v-if="article">
+                <div class="article-meta">
+                    <router-link :to="{name: 'userProfile', params: {slug: article.author.username}}">
+                        <img :src="article.author.image" alt="">
+                    </router-link>
+                    <div class="info">
+                        <router-link class="author" :to="{name: 'userProfile', params: {slug: article.author.username}}">
+                            {{ article.author.username }}
+                        </router-link>
+                        <span class="date">{{ articleDate }}</span>
+                    </div>
+                    <mcv-active-buttons :userProfile="article.author" v-if="!isAuthor" />
+                    &nbsp;
+                    <mcv-add-to-favorites :is-favorited="article.favorited" :article-slug="article.slug" :favorites-count="article.favoritesCount" :hasText="true" />
+                </div>
+            </div>
+            <mcv-article-comments v-if="currentUser" />
         </div>
     </div>
 </template>
@@ -55,6 +73,7 @@ import McvErrorMessage from '@/components/ErrorMessage'
 import McvTaglist from '@/components/Taglist'
 import McvActiveButtons from '@/components/ActiveButtons'
 import McvAddToFavorites from '@/components/AddToFavorites'
+import McvArticleComments from '@/components/ArticleComments'
 
 export default {
     name: 'McvArticle',
@@ -63,7 +82,8 @@ export default {
         McvErrorMessage,
         McvTaglist,
         McvActiveButtons,
-        McvAddToFavorites
+        McvAddToFavorites,
+        McvArticleComments
     },
     computed: {
         ...mapState({
