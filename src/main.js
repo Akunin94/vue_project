@@ -2,6 +2,9 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+import ip from 'ip';
+
+console.log(ip.address());
 
 Vue.config.productionTip = false
 
